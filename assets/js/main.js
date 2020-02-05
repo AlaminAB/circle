@@ -33,7 +33,8 @@
         rotateParentInstantly: false,
         touchElement: null
     };
-
+    let array = ["assets/img/1.jpg","assets/img/2.png","assets/img/3.jpg"]
+    let middle_img= document.querySelector("#middle-img")
     var Propeller = function (element, options) {
         if (typeof element === 'string') {
             element = document.querySelectorAll(element);
@@ -59,13 +60,33 @@
         this.addListeners();
         this.update();
         let self = this;
-
+        let count =0;
         setInterval(function(){
             self.update.bind(self);
-            self.angle +=1;
+            self.angle +=0.5;
             self.updateCSS(self.angle);
+ 
             console.log(self.angle)
-        },80)
+        },100);
+        setInterval(function(){
+           if(self.angle>0 && self.angle < 20){
+            middle_img.src=array[0]
+            
+
+        }else if(self.angle>40 && self.angle <60){
+            middle_img.src=array[1];
+        }
+        else if(self.angle>60 && self.angle <80){
+            middle_img.src=array[2];
+            
+        }
+
+
+
+if(count > array.length-1){
+    count =0;
+}
+},1000)
     };
 
     Propeller.createMany = function (nodes, options) {
